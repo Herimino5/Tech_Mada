@@ -14,7 +14,7 @@ class AuthController extends BaseController
     public function login()
     {
         $rules = [
-            'email'    => 'required|valid_email',
+            'email'    => 'required',
             'password' => 'required'
         ];
 
@@ -46,13 +46,13 @@ class AuthController extends BaseController
 
         switch ($user->role) {
             case 'rh':
-                $dest = '/rh/dashboard';
+                $dest = base_url('rh/dashboard');
                 break;
             case 'admin':
-                $dest = '/admin/dashboard';
+                $dest = base_url('admin/dashboard');
                 break;
             default:
-                $dest = '/employe/dashboard';
+                $dest = base_url('employe/dashboard');
         }
 
         return redirect()->to($dest);
@@ -61,6 +61,6 @@ class AuthController extends BaseController
     public function logout()
     {
         session()->destroy();
-        return redirect()->to('/login');
+        return redirect()->to(base_url('login'));
     }
 }

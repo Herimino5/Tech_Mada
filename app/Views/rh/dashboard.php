@@ -6,7 +6,10 @@
   </div>
   <div style="padding:1.25rem">
     <p>Bienvenue, <?= esc(session()->get('prenom') . ' ' . session()->get('nom')) ?>.</p>
-    <p><a href="<?= site_url('/logout') ?>" class="btn-secondary">Se déconnecter</a></p>
+    <form method="post" action="<?= base_url('logout') ?>" style="display:inline">
+      <?= csrf_field() ?>
+      <button type="submit" class="btn-secondary">Se déconnecter</button>
+    </form>
   </div>
 </div>
 <?= $this->endSection() ?>

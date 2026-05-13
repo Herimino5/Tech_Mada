@@ -45,7 +45,7 @@
                 </ul></div>
             <?php endif; ?>
 
-            <form method="post" action="<?= site_url('/login') ?>">
+            <form method="post" action="<?= base_url('login') ?>">
                 <?= csrf_field() ?>
 
                 <div class="mb-3">
