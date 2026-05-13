@@ -1,118 +1,90 @@
-
-# TODO List : Application de Gestion de Bibliothèque (CodeIgniter 4)
-
-### POUR LANCER LE PROJET VAS DANS
-`ETU4362/readme.md`
-
-## 0. Configuration initiale & base de données
-- [ ] **Base de données** : Créer la BDD `bibliotheque` en UTF-8.
-- [ ] **Tables** :
-	- [ ] `livres` : id, titre, auteur, ISBN, annee, categorie, resume, couverture, statut, created_at, updated_at.
-	- [ ] `emprunts` : id, livre_id, nom_emprunteur, date_emprunt, date_retour.
-- [ ] **Configuration** : Vérifier la connexion dans `app/Config/Database.php` et/ou `.env`.
-- [ ] **Sécurité** : Activer le filtre CSRF globalement dans `app/Config/Filters.php`.
+# 🔐 Tâches — Module Authentification (Login)
+**Projet : TechMada — Système RH interne**
+**Durée estimée : 40 min**
 
 ---
 
-## 1. Fonctionnalité : Catalogue des livres (recherche et liste paginée)
-- [ ] **Route** : `GET /` vers `LivreController::index`.
-- [ ] **Model (`LivreModel.php`)** :
-	- [ ] Déclarer la table, la clé primaire, les champs autorisés et activer les timestamps.
-	- [ ] Ajouter une méthode de recherche avec filtre par mot-clé.
-	- [ ] Ajouter une méthode pour la pagination avec 10 livres par page.
-- [ ] **Controller (`LivreController.php`)** :
-	- [ ] Implémenter `index()`.
-	- [ ] Récupérer les paramètres GET (`keyword`, `categorie`).
-	- [ ] Appeler le modèle pour récupérer les livres.
-	- [ ] Générer la pagination.
-	- [ ] Retourner la vue.
-- [ ] **Views** :
-	- [ ] `app/Views/layout.php` : créer le layout principal avec messages flash et contenu.
-	- [ ] `app/Views/livres/index.php` : afficher le formulaire de recherche, la liste des livres et les liens de pagination.
+## 1. Setup initial
+
+- [ ] Créer les routes d'authentification dans `routes/web.php`
+  - `GET /login` → afficher le formulaire
+  - `POST /login` → traiter la connexion
+  - `POST /logout` → déconnexion
+- [ ] Créer le contrôleur `AuthController`
 
 ---
 
-## 2. Fonctionnalité : Détails d’un livre
-- [ ] **Route** : `GET /livres/(:num)` vers `LivreController::detail`.
-- [ ] **Model (`EmpruntModel.php`)** :
-	- [ ] Déclarer la table, les champs autorisés et les timestamps.
-	- [ ] Ajouter une méthode pour récupérer le dernier emprunt d’un livre.
-- [ ] **Controller (`LivreController.php`)** :
-	- [ ] Implémenter `detail($id)`.
-	- [ ] Récupérer le livre.
-	- [ ] Retourner une erreur 404 si le livre n’existe pas.
-	- [ ] Récupérer le dernier emprunt.
-	- [ ] Retourner la vue.
-- [ ] **View (`app/Views/livres/show.php`)** :
-	- [ ] Afficher toutes les informations du livre.
-	- [ ] Afficher la couverture.
-	- [ ] Afficher les informations du dernier emprunt si elles existent.
+## 2. Vue — Formulaire de login
+
+- [ ] Créer la vue `resources/views/auth/login.blade.php`
+  - Champ `email`
+  - Champ `password`
+  - Bouton "Se connecter"
+  - Affichage des erreurs de validation
+  - Token CSRF (`@csrf`) sur le formulaire POST
 
 ---
 
-## 3. Fonctionnalité : Ajout d’un livre (formulaire et sauvegarde)
-- [ ] **Routes** :
-	- [ ] `GET /livres/nouveau` pour afficher le formulaire.
-	- [ ] `POST /livres/store` pour traiter l’enregistrement.
-- [ ] **Model (`LivreModel.php`)** :
-	- [ ] Définir les règles de validation pour titre, auteur, ISBN et année.
-	- [ ] Définir les messages d’erreur en français.
-- [ ] **Controller (`LivreController.php`)** :
-	- [ ] Implémenter `ajouter()`.
-	- [ ] Implémenter `enregistrer()`.
-	- [ ] Vérifier que l’année n’est pas dans le futur.
-	- [ ] Valider l’image de couverture (jpeg/png/webp, max 2 Mo).
-	- [ ] Déplacer l’image vers `public/uploads/`.
-	- [ ] Insérer le livre en base.
-	- [ ] Gérer les erreurs avec `withInput()`.
-	- [ ] Rediriger vers l’accueil après succès.
-- [ ] **View (`app/Views/livres/create.php`)** :
-	- [ ] Ajouter le formulaire avec `csrf_field()`.
-	- [ ] Conserver les valeurs avec `old()`.
-	- [ ] Afficher les erreurs sous chaque champ.
+## 3. Logique de connexion (`AuthController`)
+
+- [ ] Méthode `showLogin()` → retourner la vue login
+- [ ] Méthode `login(Request $request)`
+  - Valider `email` et `password` (required)
+  - Vérifier l'existence de l'employé par email
+  - Vérifier le mot de passe avec `password_verify()`
+  - Vérifier que le compte est **actif** (`actif = 1`)
+  - Démarrer la session CI4 native et stocker :
+    - `id`, `nom`, `prenom`, `email`, `role`, `departement_id`
+  - Rediriger selon le rôle :
+    - `employe` → `/employe/dashboard`
+    - `rh` → `/rh/dashboard`
+    - `admin` → `/admin/dashboard`
+  - En cas d'échec → retour avec message d'erreur (flashdata)
+- [ ] Méthode `logout()` → détruire la session et rediriger vers `/login`
 
 ---
 
-## 4. Fonctionnalité : Suppression d’un livre
-- [ ] **Route** : `POST /livres/supprimer/(:num)`.
-- [ ] **Controller (`LivreController.php`)** :
-	- [ ] Implémenter `supprimer($id)`.
-	- [ ] Supprimer le livre par son identifiant.
-	- [ ] Rediriger vers le catalogue avec un message flash.
-- [ ] **View (`app/Views/livres/index.php`)** :
-	- [ ] Ajouter un formulaire POST pour le bouton supprimer.
-	- [ ] Ajouter une confirmation JavaScript avant la suppression.
+## 4. Filtre d'authentification (`AuthFilter`)
+
+- [ ] Créer le filtre `app/Filters/AuthFilter.php`
+  - Vérifier que la session contient un utilisateur connecté
+  - Si non connecté → rediriger vers `/login`
+- [ ] Enregistrer le filtre dans `app/Config/Filters.php`
+- [ ] Appliquer le filtre sur les 3 groupes de routes protégées :
+  - `/employe/*`
+  - `/rh/*`
+  - `/admin/*`
 
 ---
 
-## 5. Fonctionnalité : Prêt d’un livre (emprunt)
-- [ ] **Route** : `POST /livres/emprunter/(:num)`.
-- [ ] **Model (`LivreModel.php` et `EmpruntModel.php`)** :
-	- [ ] Enregistrer un emprunt dans `emprunts`.
-	- [ ] Mettre à jour le statut du livre à `prete`.
-- [ ] **Controller (`EmpruntController.php`)** :
-	- [ ] Implémenter `emprunter($id)`.
-	- [ ] Vérifier que le livre existe.
-	- [ ] Vérifier que le livre est disponible.
-	- [ ] Vérifier que le nom de l’emprunteur est fourni.
-	- [ ] Créer l’emprunt.
-	- [ ] Mettre à jour le statut du livre.
-	- [ ] Rediriger avec un message de succès.
-- [ ] **View (`app/Views/livres/index.php`)** :
-	- [ ] Si le livre est disponible, afficher le champ `nom_emprunteur` et le bouton `Prêter`.
+## 5. Vérification du rôle dans les controllers
+
+- [ ] Ajouter une vérification du rôle dans chaque controller (pas dans le filtre)
+  - Ex : un employé qui tente d'accéder à `/rh/*` reçoit une erreur 403
+- [ ] Créer une méthode helper ou utiliser la session directement
 
 ---
 
-## 6. Fonctionnalité : Retour d’un livre
-- [ ] **Route** : `POST /livres/retourner/(:num)`.
-- [ ] **Model (`LivreModel.php` et `EmpruntModel.php`)** :
-	- [ ] Mettre à jour la date de retour sur l’emprunt actif.
-	- [ ] Remettre le statut du livre à `disponible`.
-- [ ] **Controller (`EmpruntController.php`)** :
-	- [ ] Implémenter `retourner($id)`.
-	- [ ] Vérifier qu’un emprunt actif existe.
-	- [ ] Mettre à jour la date de retour.
-	- [ ] Mettre à jour le statut du livre.
-	- [ ] Rediriger avec un message de succès.
-- [ ] **View (`app/Views/livres/index.php`)** :
-	- [ ] Si le livre est prêté, afficher uniquement le bouton `Retourner`.
+## 6. Tests manuels
+
+- [ ] Connexion réussie avec compte `employe` → redirigé vers espace employé
+- [ ] Connexion réussie avec compte `rh` → redirigé vers espace RH
+- [ ] Connexion réussie avec compte `admin` → redirigé vers back-office
+- [ ] Connexion échouée (mauvais mot de passe) → message d'erreur affiché
+- [ ] Compte inactif (`actif = 0`) → accès refusé
+- [ ] Accès à une route protégée sans être connecté → redirigé vers `/login`
+- [ ] Déconnexion → session détruite, retour sur `/login`
+
+---
+
+## Notes techniques (spec CI4)
+
+> - Utiliser **Session CI4 native** (pas `$_SESSION` PHP brut)
+> - `password_hash()` obligatoire côté base de données
+> - **CSRF activé** sur tous les formulaires POST
+> - Pattern PRG : `POST /login` → redirect après succès
+> - **Flashdata** CI4 pour les messages d'erreur/succès
+
+---
+
+*Livrables attendus : AuthController fonctionnel + AuthFilter appliqué + vue login propre*
