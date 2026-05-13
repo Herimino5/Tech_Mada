@@ -30,6 +30,18 @@ class AdminModel extends Model
         ];
     }
 
+    public function getEmployeeById(int $employeeId): ?array
+    {
+        $row = $this->db->table('employes e')
+            ->select('e.id, e.nom, e.prenom, e.email, e.role, e.departement_id, e.date_embauche, e.actif, d.nom AS departement_nom')
+            ->join('departments d', 'd.id = e.departement_id', 'left')
+            ->where('e.id', $employeeId)
+            ->get()
+            ->getRowArray();
+
+        return $row ?: null;
+    }
+
     public function getStats(): array
     {
         $db = $this->db;
@@ -97,12 +109,125 @@ class AdminModel extends Model
         )->getResultArray();
     }
 
-    public function getEmployees(): array
+    public function getEmployees(?int $annee = null): array
     {
+        $annee = $annee ?? (int) date('Y');
+
         return $this->db->table('employes e')
-            ->select('e.id, e.nom, e.prenom, e.email, e.role, e.date_embauche, e.actif, d.nom AS departement_nom')
+            ->select('e.id, e.nom, e.prenom, e.email, e.role, e.date_embauche, e.actif, d.nom AS departement_nom, COALESCE(SUM(s.jours_attribues), 0) AS total_attribues, COALESCE(SUM(s.jours_pris), 0) AS total_pris')
             ->join('departments d', 'd.id = e.departement_id', 'left')
+            ->join('soldes s', 's.employe_id = e.id AND s.annee = ' . (int) $annee, 'left')
+            ->groupBy('e.id')
             ->orderBy('e.prenom', 'ASC')
+            ->get()
+            ->getResultArray();
+    }
+
+    public function updateEmployee(int $employeeId, array $data): bool
+    {
+        return (bool) $this->db->table('employes')
+            ->where('id', $employeeId)
+            ->update($data);
+    }
+
+    public function getEmployeeBalances(int $employeeId, int $annee): array
+    {
+        return $this->db->table('types_conge t')
+            ->select('t.id AS type_conge_id, t.libelle, t.jours_annuels, t.deductible, COALESCE(s.jours_attribues, t.jours_annuels) AS jours_attribues, COALESCE(s.jours_pris, 0) AS jours_pris')
+            ->join('soldes s', 's.type_conge_id = t.id AND s.employe_id = ' . (int) $employeeId . ' AND s.annee = ' . (int) $annee, 'left')
+            ->orderBy('t.id', 'ASC')
+            ->get()
+            ->getResultArray();
+    }
+
+    public function ensureAnnualBalances(int $employeeId, int $annee): void
+    {
+        $types = $this->getTypesConge();
+
+        foreach ($types as $type) {
+            $typeId = (int) ($type['id'] ?? 0);
+            if ($typeId <= 0) {
+                continue;
+            }
+
+            $exists = $this->db->table('soldes')
+                ->select('id')
+                ->where('employe_id', $employeeId)
+                ->where('type_conge_id', $typeId)
+                ->where('annee', $annee)
+                ->get()
+                ->getRowArray();
+
+            if ($exists !== null) {
+                continue;
+            }
+
+            $this->db->table('soldes')->insert([
+                'employe_id' => $employeeId,
+                'type_conge_id' => $typeId,
+                'annee' => $annee,
+                'jours_attribues' => (int) ($type['jours_annuels'] ?? 0),
+                'jours_pris' => 0,
+            ]);
+        }
+    }
+
+    /**
+     * @param array<int, array{jours_attribues?: int|string, jours_pris?: int|string}> $balances
+     */
+    public function saveAnnualBalances(int $employeeId, int $annee, array $balances): bool
+    {
+        $db = $this->db;
+        $db->transStart();
+
+        foreach ($balances as $typeId => $values) {
+            $typeId = (int) $typeId;
+            if ($typeId <= 0 || ! is_array($values)) {
+                continue;
+            }
+
+            $joursAttribues = max(0, (int) ($values['jours_attribues'] ?? 0));
+            $joursPris = max(0, (int) ($values['jours_pris'] ?? 0));
+
+            $exists = $db->table('soldes')
+                ->select('id')
+                ->where('employe_id', $employeeId)
+                ->where('type_conge_id', $typeId)
+                ->where('annee', $annee)
+                ->get()
+                ->getRowArray();
+
+            $payload = [
+                'employe_id' => $employeeId,
+                'type_conge_id' => $typeId,
+                'annee' => $annee,
+                'jours_attribues' => $joursAttribues,
+                'jours_pris' => $joursPris,
+            ];
+
+            if ($exists !== null) {
+                $db->table('soldes')
+                    ->where('id', (int) $exists['id'])
+                    ->update($payload);
+            } else {
+                $db->table('soldes')->insert($payload);
+            }
+        }
+
+        $db->transComplete();
+
+        return $db->transStatus();
+    }
+
+    public function getAllRequests(): array
+    {
+        return $this->db->table('conges c')
+            ->select('c.id, c.date_debut, c.date_fin, c.nb_jours, c.motif, c.statut, c.commentaire_rh, c.created_at, c.traite_par, t.libelle AS type_libelle, e.prenom AS employe_prenom, e.nom AS employe_nom, e.email AS employe_email, d.nom AS departement_nom, r.prenom AS rh_prenom, r.nom AS rh_nom')
+            ->join('types_conge t', 't.id = c.type_conge_id')
+            ->join('employes e', 'e.id = c.employe_id')
+            ->join('departments d', 'd.id = e.departement_id', 'left')
+            ->join('employes r', 'r.id = c.traite_par', 'left')
+            ->orderBy('c.created_at', 'DESC')
             ->get()
             ->getResultArray();
     }

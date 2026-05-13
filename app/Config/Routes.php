@@ -24,3 +24,7 @@ $routes->post('/employe/demandes/(:num)/annuler', 'EmployeController::cancelDema
 $routes->get('/rh/dashboard', 'Home::rh');
 $routes->get('/admin/dashboard', 'AdminController::dashboard');
 $routes->get('/admin/employes', 'AdminController::employes');
+$routes->post('/admin/employes/(:num)', 'AdminController::updateEmploye/$1');
+$routes->post('/admin/employes/(:num)/soldes/initialiser', 'AdminController::initialiseSoldes/$1');
+$routes->post('/admin/employes/(:num)/soldes', 'AdminController::saveSoldes/$1');
+$routes->get('/admin/demandes', 'AdminController::demandes');

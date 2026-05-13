@@ -73,6 +73,8 @@ $roleConfig = [
         'icon' => 'bi bi-shield-check',
         'menu' => [
             ['label' => 'Vue d\'ensemble', 'icon' => 'bi bi-speedometer2', 'url' => '/admin/dashboard', 'match' => 'admin/dashboard'],
+            ['label' => 'Employés', 'icon' => 'bi bi-people', 'url' => '/admin/employes', 'match' => 'admin/employes'],
+            ['label' => 'Demandes', 'icon' => 'bi bi-calendar2-week', 'url' => '/admin/demandes', 'match' => 'admin/demandes'],
         ],
     ],
 ];

@@ -10,6 +10,7 @@ $criticalBalances = is_array($viewData['criticalBalances'] ?? null) ? $viewData[
 <?= $this->section('breadcrumb') ?>Administration / Vue d'ensemble<?= $this->endSection() ?>
 <?= $this->section('topbar_actions') ?>
 <a href="<?= site_url('/admin/employes') ?>" class="btn-forest"><i class="bi bi-people"></i> Employés</a>
+<a href="<?= site_url('/admin/demandes') ?>" class="btn-secondary"><i class="bi bi-calendar2-week"></i> Demandes</a>
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
