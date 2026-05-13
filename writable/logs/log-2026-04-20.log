@@ -1,0 +1,157 @@
+CRITICAL - 2026-04-20 13:44:21 --> Error: Class "App\Controllers\BaseController" not found
+[Method: CLI, Route: routes]
+in APPPATH/Controllers/LivreController.php on line 8.
+ 1 SYSTEMPATH/Autoloader/Autoloader.php(315): include_once()
+ 2 SYSTEMPATH/Autoloader/Autoloader.php(295): CodeIgniter\Autoloader\Autoloader->includeFile()
+ 3 SYSTEMPATH/Autoloader/Autoloader.php(271): CodeIgniter\Autoloader\Autoloader->loadInNamespace()
+ 4 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass()
+ 5 SYSTEMPATH/Router/Router.php(792): class_exists()
+ 6 SYSTEMPATH/Router/Router.php(230): CodeIgniter\Router\Router->processRouteAttributes()
+ 7 SYSTEMPATH/Commands/Utilities/Routes/FilterFinder.php(41): CodeIgniter\Router\Router->handle()
+ 8 SYSTEMPATH/Commands/Utilities/Routes/FilterFinder.php(57): CodeIgniter\Commands\Utilities\Routes\FilterFinder->getRouteFilters()
+ 9 SYSTEMPATH/Commands/Utilities/Routes/FilterCollector.php(78): CodeIgniter\Commands\Utilities\Routes\FilterFinder->find()
+10 SYSTEMPATH/Commands/Utilities/Routes.php(110): CodeIgniter\Commands\Utilities\Routes\FilterCollector->get()
+11 SYSTEMPATH/CLI/Commands.php(74): CodeIgniter\Commands\Utilities\Routes->run()
+12 SYSTEMPATH/CLI/Console.php(47): CodeIgniter\CLI\Commands->run()
+13 SYSTEMPATH/Boot.php(442): CodeIgniter\CLI\Console->run()
+14 SYSTEMPATH/Boot.php(166): CodeIgniter\Boot::runCommand()
+15 ROOTPATH/spark(87): CodeIgniter\Boot::bootSpark()
+ERROR - 2026-04-20 13:59:31 --> Error connecting to the database: mysqli_sql_exception: No such file or directory in /home/herimino/S4/MrRojo/codeigniter4-framework-v4.7.2-0-gb3359be/codeigniter4-framework-b3359be/system/Database/MySQLi/Connection.php:201
+Stack trace:
+#0 /home/herimino/S4/MrRojo/codeigniter4-framework-v4.7.2-0-gb3359be/codeigniter4-framework-b3359be/system/Database/MySQLi/Connection.php(201): mysqli->real_connect()
+#1 /home/herimino/S4/MrRojo/codeigniter4-framework-v4.7.2-0-gb3359be/codeigniter4-framework-b3359be/system/Database/BaseConnection.php(555): CodeIgniter\Database\MySQLi\Connection->connect()
+#2 /home/herimino/S4/MrRojo/codeigniter4-framework-v4.7.2-0-gb3359be/codeigniter4-framework-b3359be/system/Database/BaseConnection.php(795): CodeIgniter\Database\BaseConnection->initialize()
+#3 /home/herimino/S4/MrRojo/codeigniter4-framework-v4.7.2-0-gb3359be/codeigniter4-framework-b3359be/system/Database/BaseBuilder.php(1733): CodeIgniter\Database\BaseConnection->query()
+#4 /home/herimino/S4/MrRojo/codeigniter4-framework-v4.7.2-0-gb3359be/codeigniter4-framework-b3359be/system/Model.php(523): CodeIgniter\Database\BaseBuilder->countAllResults()
+#5 /home/herimino/S4/MrRojo/codeigniter4-framework-v4.7.2-0-gb3359be/codeigniter4-framework-b3359be/system/BaseModel.php(1333): CodeIgniter\Model->countAllResults()
+#6 /home/herimino/S4/MrRojo/codeigniter4-framework-v4.7.2-0-gb3359be/codeigniter4-framework-b3359be/app/Controllers/LivreController.php(29): CodeIgniter\BaseModel->paginate()
+#7 /home/herimino/S4/MrRojo/codeigniter4-framework-v4.7.2-0-gb3359be/codeigniter4-framework-b3359be/system/CodeIgniter.php(951): App\Controllers\LivreController->index()
+#8 /home/herimino/S4/MrRojo/codeigniter4-framework-v4.7.2-0-gb3359be/codeigniter4-framework-b3359be/system/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+#9 /home/herimino/S4/MrRojo/codeigniter4-framework-v4.7.2-0-gb3359be/codeigniter4-framework-b3359be/system/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+#10 /home/herimino/S4/MrRojo/codeigniter4-framework-v4.7.2-0-gb3359be/codeigniter4-framework-b3359be/system/Boot.php(417): CodeIgniter\CodeIgniter->run()
+#11 /home/herimino/S4/MrRojo/codeigniter4-framework-v4.7.2-0-gb3359be/codeigniter4-framework-b3359be/system/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+#12 /home/herimino/S4/MrRojo/codeigniter4-framework-v4.7.2-0-gb3359be/codeigniter4-framework-b3359be/public/index.php(59): CodeIgniter\Boot::bootWeb()
+#13 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: No such file or directory in /home/herimino/S4/MrRojo/codeigniter4-framework-v4.7.2-0-gb3359be/codeigniter4-framework-b3359be/system/Database/MySQLi/Connection.php:231
+Stack trace:
+#0 /home/herimino/S4/MrRojo/codeigniter4-framework-v4.7.2-0-gb3359be/codeigniter4-framework-b3359be/system/Database/BaseConnection.php(555): CodeIgniter\Database\MySQLi\Connection->connect()
+#1 /home/herimino/S4/MrRojo/codeigniter4-framework-v4.7.2-0-gb3359be/codeigniter4-framework-b3359be/system/Database/BaseConnection.php(795): CodeIgniter\Database\BaseConnection->initialize()
+#2 /home/herimino/S4/MrRojo/codeigniter4-framework-v4.7.2-0-gb3359be/codeigniter4-framework-b3359be/system/Database/BaseBuilder.php(1733): CodeIgniter\Database\BaseConnection->query()
+#3 /home/herimino/S4/MrRojo/codeigniter4-framework-v4.7.2-0-gb3359be/codeigniter4-framework-b3359be/system/Model.php(523): CodeIgniter\Database\BaseBuilder->countAllResults()
+#4 /home/herimino/S4/MrRojo/codeigniter4-framework-v4.7.2-0-gb3359be/codeigniter4-framework-b3359be/system/BaseModel.php(1333): CodeIgniter\Model->countAllResults()
+#5 /home/herimino/S4/MrRojo/codeigniter4-framework-v4.7.2-0-gb3359be/codeigniter4-framework-b3359be/app/Controllers/LivreController.php(29): CodeIgniter\BaseModel->paginate()
+#6 /home/herimino/S4/MrRojo/codeigniter4-framework-v4.7.2-0-gb3359be/codeigniter4-framework-b3359be/system/CodeIgniter.php(951): App\Controllers\LivreController->index()
+#7 /home/herimino/S4/MrRojo/codeigniter4-framework-v4.7.2-0-gb3359be/codeigniter4-framework-b3359be/system/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+#8 /home/herimino/S4/MrRojo/codeigniter4-framework-v4.7.2-0-gb3359be/codeigniter4-framework-b3359be/system/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+#9 /home/herimino/S4/MrRojo/codeigniter4-framework-v4.7.2-0-gb3359be/codeigniter4-framework-b3359be/system/Boot.php(417): CodeIgniter\CodeIgniter->run()
+#10 /home/herimino/S4/MrRojo/codeigniter4-framework-v4.7.2-0-gb3359be/codeigniter4-framework-b3359be/system/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+#11 /home/herimino/S4/MrRojo/codeigniter4-framework-v4.7.2-0-gb3359be/codeigniter4-framework-b3359be/public/index.php(59): CodeIgniter\Boot::bootWeb()
+#12 {main}
+CRITICAL - 2026-04-20 13:59:31 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: No such file or directory
+[Method: GET, Route: /]
+in SYSTEMPATH/Database/BaseConnection.php on line 606.
+ 1 SYSTEMPATH/Database/BaseConnection.php(795): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH/Database/BaseBuilder.php(1733): CodeIgniter\Database\BaseConnection->query()
+ 3 SYSTEMPATH/Model.php(523): CodeIgniter\Database\BaseBuilder->countAllResults()
+ 4 SYSTEMPATH/BaseModel.php(1333): CodeIgniter\Model->countAllResults()
+ 5 APPPATH/Controllers/LivreController.php(29): CodeIgniter\BaseModel->paginate()
+ 6 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\LivreController->index()
+ 7 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 9 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+11 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+ERROR - 2026-04-20 13:59:33 --> Error connecting to the database: mysqli_sql_exception: No such file or directory in /home/herimino/S4/MrRojo/codeigniter4-framework-v4.7.2-0-gb3359be/codeigniter4-framework-b3359be/system/Database/MySQLi/Connection.php:201
+Stack trace:
+#0 /home/herimino/S4/MrRojo/codeigniter4-framework-v4.7.2-0-gb3359be/codeigniter4-framework-b3359be/system/Database/MySQLi/Connection.php(201): mysqli->real_connect()
+#1 /home/herimino/S4/MrRojo/codeigniter4-framework-v4.7.2-0-gb3359be/codeigniter4-framework-b3359be/system/Database/BaseConnection.php(555): CodeIgniter\Database\MySQLi\Connection->connect()
+#2 /home/herimino/S4/MrRojo/codeigniter4-framework-v4.7.2-0-gb3359be/codeigniter4-framework-b3359be/system/Database/BaseConnection.php(795): CodeIgniter\Database\BaseConnection->initialize()
+#3 /home/herimino/S4/MrRojo/codeigniter4-framework-v4.7.2-0-gb3359be/codeigniter4-framework-b3359be/system/Database/BaseBuilder.php(1733): CodeIgniter\Database\BaseConnection->query()
+#4 /home/herimino/S4/MrRojo/codeigniter4-framework-v4.7.2-0-gb3359be/codeigniter4-framework-b3359be/system/Model.php(523): CodeIgniter\Database\BaseBuilder->countAllResults()
+#5 /home/herimino/S4/MrRojo/codeigniter4-framework-v4.7.2-0-gb3359be/codeigniter4-framework-b3359be/system/BaseModel.php(1333): CodeIgniter\Model->countAllResults()
+#6 /home/herimino/S4/MrRojo/codeigniter4-framework-v4.7.2-0-gb3359be/codeigniter4-framework-b3359be/app/Controllers/LivreController.php(29): CodeIgniter\BaseModel->paginate()
+#7 /home/herimino/S4/MrRojo/codeigniter4-framework-v4.7.2-0-gb3359be/codeigniter4-framework-b3359be/system/CodeIgniter.php(951): App\Controllers\LivreController->index()
+#8 /home/herimino/S4/MrRojo/codeigniter4-framework-v4.7.2-0-gb3359be/codeigniter4-framework-b3359be/system/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+#9 /home/herimino/S4/MrRojo/codeigniter4-framework-v4.7.2-0-gb3359be/codeigniter4-framework-b3359be/system/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+#10 /home/herimino/S4/MrRojo/codeigniter4-framework-v4.7.2-0-gb3359be/codeigniter4-framework-b3359be/system/Boot.php(417): CodeIgniter\CodeIgniter->run()
+#11 /home/herimino/S4/MrRojo/codeigniter4-framework-v4.7.2-0-gb3359be/codeigniter4-framework-b3359be/system/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+#12 /home/herimino/S4/MrRojo/codeigniter4-framework-v4.7.2-0-gb3359be/codeigniter4-framework-b3359be/public/index.php(59): CodeIgniter\Boot::bootWeb()
+#13 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: No such file or directory in /home/herimino/S4/MrRojo/codeigniter4-framework-v4.7.2-0-gb3359be/codeigniter4-framework-b3359be/system/Database/MySQLi/Connection.php:231
+Stack trace:
+#0 /home/herimino/S4/MrRojo/codeigniter4-framework-v4.7.2-0-gb3359be/codeigniter4-framework-b3359be/system/Database/BaseConnection.php(555): CodeIgniter\Database\MySQLi\Connection->connect()
+#1 /home/herimino/S4/MrRojo/codeigniter4-framework-v4.7.2-0-gb3359be/codeigniter4-framework-b3359be/system/Database/BaseConnection.php(795): CodeIgniter\Database\BaseConnection->initialize()
+#2 /home/herimino/S4/MrRojo/codeigniter4-framework-v4.7.2-0-gb3359be/codeigniter4-framework-b3359be/system/Database/BaseBuilder.php(1733): CodeIgniter\Database\BaseConnection->query()
+#3 /home/herimino/S4/MrRojo/codeigniter4-framework-v4.7.2-0-gb3359be/codeigniter4-framework-b3359be/system/Model.php(523): CodeIgniter\Database\BaseBuilder->countAllResults()
+#4 /home/herimino/S4/MrRojo/codeigniter4-framework-v4.7.2-0-gb3359be/codeigniter4-framework-b3359be/system/BaseModel.php(1333): CodeIgniter\Model->countAllResults()
+#5 /home/herimino/S4/MrRojo/codeigniter4-framework-v4.7.2-0-gb3359be/codeigniter4-framework-b3359be/app/Controllers/LivreController.php(29): CodeIgniter\BaseModel->paginate()
+#6 /home/herimino/S4/MrRojo/codeigniter4-framework-v4.7.2-0-gb3359be/codeigniter4-framework-b3359be/system/CodeIgniter.php(951): App\Controllers\LivreController->index()
+#7 /home/herimino/S4/MrRojo/codeigniter4-framework-v4.7.2-0-gb3359be/codeigniter4-framework-b3359be/system/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+#8 /home/herimino/S4/MrRojo/codeigniter4-framework-v4.7.2-0-gb3359be/codeigniter4-framework-b3359be/system/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+#9 /home/herimino/S4/MrRojo/codeigniter4-framework-v4.7.2-0-gb3359be/codeigniter4-framework-b3359be/system/Boot.php(417): CodeIgniter\CodeIgniter->run()
+#10 /home/herimino/S4/MrRojo/codeigniter4-framework-v4.7.2-0-gb3359be/codeigniter4-framework-b3359be/system/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+#11 /home/herimino/S4/MrRojo/codeigniter4-framework-v4.7.2-0-gb3359be/codeigniter4-framework-b3359be/public/index.php(59): CodeIgniter\Boot::bootWeb()
+#12 {main}
+CRITICAL - 2026-04-20 13:59:33 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: No such file or directory
+[Method: GET, Route: /]
+in SYSTEMPATH/Database/BaseConnection.php on line 606.
+ 1 SYSTEMPATH/Database/BaseConnection.php(795): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH/Database/BaseBuilder.php(1733): CodeIgniter\Database\BaseConnection->query()
+ 3 SYSTEMPATH/Model.php(523): CodeIgniter\Database\BaseBuilder->countAllResults()
+ 4 SYSTEMPATH/BaseModel.php(1333): CodeIgniter\Model->countAllResults()
+ 5 APPPATH/Controllers/LivreController.php(29): CodeIgniter\BaseModel->paginate()
+ 6 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\LivreController->index()
+ 7 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 9 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+11 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+CRITICAL - 2026-04-20 14:07:58 --> Error: Class "App\Models\EmpruntModel" not found
+[Method: GET, Route: livres/1]
+in APPPATH/Controllers/LivreController.php on line 39.
+ 1 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\LivreController->detail()
+ 2 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 3 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 4 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+ 6 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+CRITICAL - 2026-04-20 14:08:06 --> Error: Class "App\Models\EmpruntModel" not found
+[Method: GET, Route: livres/1]
+in APPPATH/Controllers/LivreController.php on line 39.
+ 1 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\LivreController->detail()
+ 2 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 3 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 4 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+ 6 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+CRITICAL - 2026-04-20 14:11:02 --> Error: Class "App\Models\EmpruntModel" not found
+[Method: GET, Route: livres/10]
+in APPPATH/Controllers/LivreController.php on line 39.
+ 1 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\LivreController->detail()
+ 2 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 3 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 4 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+ 6 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+CRITICAL - 2026-04-20 14:13:23 --> Error: Class "App\Models\EmpruntModel" not found
+[Method: GET, Route: livres/10]
+in APPPATH/Controllers/LivreController.php on line 39.
+ 1 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\LivreController->detail()
+ 2 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 3 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 4 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+ 6 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+CRITICAL - 2026-04-20 14:13:33 --> Error: Class "App\Models\EmpruntModel" not found
+[Method: GET, Route: livres/10]
+in APPPATH/Controllers/LivreController.php on line 39.
+ 1 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\LivreController->detail()
+ 2 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 3 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 4 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+ 6 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
