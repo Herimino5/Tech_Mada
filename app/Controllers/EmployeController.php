@@ -49,6 +49,20 @@ class EmployeController extends BaseController
         ]);
     }
 
+    public function demandes()
+    {
+        if ((string) session()->get('role') !== 'employe') {
+            return redirect()->to('/login')->with('error', 'Acces refuse.');
+        }
+
+        $employeId = (int) session()->get('id');
+
+        return view('employe/index', [
+            'demandes' => $this->espaceModel->getAllDemandes($employeId),
+            'fullName' => trim((string) session()->get('prenom') . ' ' . (string) session()->get('nom')),
+        ]);
+    }
+
     public function storeDemande()
     {
         if ((string) session()->get('role') !== 'employe') {

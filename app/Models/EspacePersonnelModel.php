@@ -79,6 +79,17 @@ class EspacePersonnelModel extends Model
             ->getResultArray();
     }
 
+    public function getAllDemandes(int $employeId): array
+    {
+        return $this->db->table('conges c')
+            ->select('c.id, c.date_debut, c.date_fin, c.nb_jours, c.statut, c.commentaire_rh, c.motif, c.created_at, t.libelle AS type_libelle')
+            ->join('types_conge t', 't.id = c.type_conge_id')
+            ->where('c.employe_id', $employeId)
+            ->orderBy('c.created_at', 'DESC')
+            ->get()
+            ->getResultArray();
+    }
+
     public function getTypesAvecSolde(int $employeId, int $annee): array
     {
         return $this->db->table('types_conge t')
