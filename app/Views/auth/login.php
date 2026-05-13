@@ -308,7 +308,7 @@
             <p class="auth-sub">Entrez vos identifiants pour accéder à votre espace.</p>
 
             <?php if ($error = session()->getFlashdata('error')): ?>
-                <div class="flash flash-error"><i class="bi bi-exclamation-circle-fill"></i> <?= esc($error) ?></div>
+                <div class="flash flash-error"><i class="bi bi-exclamation-circle-fill"></i> <?= $error ?></div>
             <?php endif; ?>
 
             <?php $errors = session()->getFlashdata('errors'); ?>

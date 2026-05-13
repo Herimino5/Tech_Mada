@@ -21,7 +21,6 @@ $routes->post('/employe/profil', 'EmployeController::updateProfile');
 $routes->post('/employe/demandes/(:num)/annuler', 'EmployeController::cancelDemande/$1');
 
 // Dashboards RH/Admin
-$routes->get('/rh/dashboard', 'Home::rh');
 $routes->get('/admin/dashboard', 'AdminController::dashboard');
 $routes->get('/admin/employes', 'AdminController::employes');
 $routes->post('/admin/employes/(:num)', 'AdminController::updateEmploye/$1');
