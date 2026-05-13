@@ -167,3 +167,50 @@ in SYSTEMPATH/Database/SQLite3/Connection.php on line 164.
  9 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
 10 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
 11 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+CRITICAL - 2026-05-13 08:20:38 --> CodeIgniter\Exceptions\BadMethodCallException: Call to undefined method App\Models\CongeModel::countWhere
+[Method: GET, Route: rh/dashboard]
+in SYSTEMPATH/Model.php on line 761.
+ 1 APPPATH/Controllers/RhController.php(28): CodeIgniter\Model->__call()
+ 2 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\RhController->dashboard()
+ 3 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 5 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+ 7 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+CRITICAL - 2026-05-13 08:21:29 --> TypeError: CodeIgniter\Model::countAllResults(): Argument #1 ($reset) must be of type bool, array given, called in /home/herimino/S4/MrRojo/Tech_Mada/app/Controllers/RhController.php on line 28
+[Method: GET, Route: rh/dashboard]
+in SYSTEMPATH/Model.php on line 510.
+ 1 APPPATH/Controllers/RhController.php(28): CodeIgniter\Model->countAllResults()
+ 2 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\RhController->dashboard()
+ 3 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 5 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+ 7 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+ERROR - 2026-05-13 08:23:39 --> no such column: updated_at
+in SYSTEMPATH/Database/SQLite3/Connection.php on line 163.
+ 1 SYSTEMPATH/Database/SQLite3/Connection.php(163): SQLite3->exec()
+ 2 SYSTEMPATH/Database/BaseConnection.php(910): CodeIgniter\Database\SQLite3\Connection->execute()
+ 3 SYSTEMPATH/Database/BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery()
+ 4 SYSTEMPATH/Database/BaseBuilder.php(2521): CodeIgniter\Database\BaseConnection->query()
+ 5 SYSTEMPATH/Model.php(406): CodeIgniter\Database\BaseBuilder->update()
+ 6 SYSTEMPATH/BaseModel.php(1074): CodeIgniter\Model->doUpdate()
+ 7 SYSTEMPATH/Model.php(709): CodeIgniter\BaseModel->update()
+ 8 APPPATH/Models/CongeModel.php(111): CodeIgniter\Model->update()
+ 9 APPPATH/Controllers/RhController.php(104): App\Models\CongeModel->approuverDemande()
+10 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\RhController->approuver()
+11 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+12 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+13 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+14 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+15 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+CRITICAL - 2026-05-13 08:23:39 --> Error: Call to undefined method CodeIgniter\Database\SQLite3\Connection::rawSql()
+[Method: POST, Route: rh/demandes/2/approuver]
+in APPPATH/Models/CongeModel.php on line 122.
+ 1 APPPATH/Controllers/RhController.php(104): App\Models\CongeModel->approuverDemande()
+ 2 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\RhController->approuver()
+ 3 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 5 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+ 7 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
