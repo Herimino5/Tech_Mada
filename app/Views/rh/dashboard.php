@@ -1,4 +1,12 @@
 <?= $this->extend('layout') ?>
+<?= $this->section('page_title') ?>Tableau de bord RH<?= $this->endSection() ?>
+<?= $this->section('breadcrumb') ?>Accueil / Responsable RH<?= $this->endSection() ?>
+<?= $this->section('topbar_actions') ?>
+<form method="post" action="<?= site_url('/logout') ?>">
+  <?= csrf_field() ?>
+  <button type="submit" class="btn-secondary"><i class="bi bi-box-arrow-right"></i> Se deconnecter</button>
+</form>
+<?= $this->endSection() ?>
 <?= $this->section('content') ?>
 <div class="data-card">
   <div class="data-card-head">
