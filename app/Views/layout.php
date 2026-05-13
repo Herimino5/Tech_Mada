@@ -64,6 +64,8 @@ $roleConfig = [
         'icon' => 'bi bi-person-check',
         'menu' => [
             ['label' => 'Tableau de bord', 'icon' => 'bi bi-grid-1x2', 'url' => '/rh/dashboard', 'match' => 'rh/dashboard'],
+            ['label' => 'Demandes', 'icon' => 'bi bi-inbox', 'url' => '/rh/demandes', 'match' => 'rh/demandes'],
+            ['label' => 'Vue des soldes', 'icon' => 'bi bi-bar-chart', 'url' => '/rh/soldes', 'match' => 'rh/soldes'],
         ],
     ],
     'admin' => [
