@@ -57,6 +57,8 @@ $roleConfig = [
         'menu' => [
             ['label' => 'Tableau de bord', 'icon' => 'bi bi-grid-1x2', 'url' => '/employe/dashboard', 'match' => 'employe/dashboard'],
             ['label' => 'Nouvelle demande', 'icon' => 'bi bi-plus-circle', 'url' => '/employe/demandes/nouvelle', 'match' => 'employe/demandes/nouvelle'],
+            ['label' => 'Mes demandes', 'icon' => 'bi bi-calendar3', 'url' => '/employe/demandes', 'match' => 'employe/demandes'],
+            ['label' => 'Mon profil', 'icon' => 'bi bi-person-gear', 'url' => '/employe/profil', 'match' => 'employe/profil'],
         ],
     ],
     'rh' => [
@@ -73,6 +75,8 @@ $roleConfig = [
         'icon' => 'bi bi-shield-check',
         'menu' => [
             ['label' => 'Vue d\'ensemble', 'icon' => 'bi bi-speedometer2', 'url' => '/admin/dashboard', 'match' => 'admin/dashboard'],
+            ['label' => 'Employés', 'icon' => 'bi bi-people', 'url' => '/admin/employes', 'match' => 'admin/employes'],
+            ['label' => 'Demandes', 'icon' => 'bi bi-calendar2-week', 'url' => '/admin/demandes', 'match' => 'admin/demandes'],
         ],
     ],
 ];
