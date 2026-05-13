@@ -11,7 +11,11 @@ $routes->get('/login', 'AuthController::showLogin');
 $routes->post('/login', 'AuthController::login');
 $routes->post('/logout', 'AuthController::logout');
 
-// Dashboard placeholders (to be implemented)
-$routes->get('/employe/dashboard', 'Home::employe');
+// Espace personnel employe
+$routes->get('/employe/dashboard', 'EmployeController::dashboard');
+$routes->get('/employe/demandes/nouvelle', 'EmployeController::createDemande');
+$routes->post('/employe/demandes', 'EmployeController::storeDemande');
+
+// Dashboards RH/Admin
 $routes->get('/rh/dashboard', 'Home::rh');
 $routes->get('/admin/dashboard', 'Home::admin');

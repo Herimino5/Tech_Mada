@@ -56,6 +56,7 @@ $roleConfig = [
         'icon' => 'bi bi-briefcase',
         'menu' => [
             ['label' => 'Tableau de bord', 'icon' => 'bi bi-grid-1x2', 'url' => '/employe/dashboard', 'match' => 'employe/dashboard'],
+            ['label' => 'Nouvelle demande', 'icon' => 'bi bi-plus-circle', 'url' => '/employe/demandes/nouvelle', 'match' => 'employe/demandes/nouvelle'],
         ],
     ],
     'rh' => [
