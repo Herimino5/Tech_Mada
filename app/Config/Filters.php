@@ -31,6 +31,7 @@ class Filters extends BaseFilters
         'invalidchars'  => InvalidChars::class,
         'secureheaders' => SecureHeaders::class,
         'cors'          => Cors::class,
+        'auth'          => \App\Filters\AuthFilter::class,
         'forcehttps'    => ForceHTTPS::class,
         'pagecache'     => PageCache::class,
         'performance'   => PerformanceMetrics::class,
@@ -109,4 +110,16 @@ class Filters extends BaseFilters
      * @var array<string, array<string, list<string>>>
      */
     public array $filters = [];
+    
+    public function __construct()
+    {
+        // apply auth filter to protected URI patterns
+        $this->filters['auth'] = [
+            'before' => [
+                'employe/*',
+                'rh/*',
+                'admin/*',
+            ],
+        ];
+    }
 }
