@@ -86,14 +86,15 @@ class AdminModel extends Model
 
     public function getCriticalBalances(): array
     {
-        return $this->db->table('soldes s')
-            ->select('e.prenom, e.nom, t.libelle, (s.jours_attribues - s.jours_pris) AS restants')
-            ->join('employes e', 'e.id = s.employe_id')
-            ->join('types_conge t', 't.id = s.type_conge_id')
-            ->where('s.jours_attribues - s.jours_pris <=', 2)
-            ->orderBy('restants', 'ASC')
-            ->get()
-            ->getResultArray();
+        return $this->db->query(
+            'SELECT e.prenom, e.nom, t.libelle, (s.jours_attribues - s.jours_pris) AS restants
+             FROM soldes s
+             INNER JOIN employes e ON e.id = s.employe_id
+             INNER JOIN types_conge t ON t.id = s.type_conge_id
+             WHERE (s.jours_attribues - s.jours_pris) <= ?
+             ORDER BY restants ASC',
+            [2]
+        )->getResultArray();
     }
 
     public function getEmployees(): array
