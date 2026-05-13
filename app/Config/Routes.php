@@ -28,3 +28,12 @@ $routes->post('/admin/employes/(:num)', 'AdminController::updateEmploye/$1');
 $routes->post('/admin/employes/(:num)/soldes/initialiser', 'AdminController::initialiseSoldes/$1');
 $routes->post('/admin/employes/(:num)/soldes', 'AdminController::saveSoldes/$1');
 $routes->get('/admin/demandes', 'AdminController::demandes');
+// Espace RH
+$routes->get('/rh/dashboard', 'RhController::dashboard');
+$routes->get('/rh/demandes', 'RhController::demandes');
+$routes->post('/rh/demandes/(:num)/approuver', 'RhController::approuver/$1');
+$routes->post('/rh/demandes/(:num)/refuser', 'RhController::refuser/$1');
+$routes->get('/rh/soldes', 'RhController::soldes');
+
+// Dashboards Admin
+$routes->get('/admin/dashboard', 'Home::admin');
