@@ -442,3 +442,105 @@ in APPPATH/Models/CongeModel.php on line 122.
  5 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
  6 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
  7 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+ERROR - 2026-05-13 10:51:39 --> Error connecting to the database: Exception: Unable to open database: unable to open database file in /home/itu/Tech_Mada/system/Database/SQLite3/Connection.php:111
+Stack trace:
+#0 /home/itu/Tech_Mada/system/Database/SQLite3/Connection.php(111): SQLite3->__construct()
+#1 /home/itu/Tech_Mada/system/Database/BaseConnection.php(555): CodeIgniter\Database\SQLite3\Connection->connect()
+#2 /home/itu/Tech_Mada/system/Database/SQLite3/Connection.php(74): CodeIgniter\Database\BaseConnection->initialize()
+#3 /home/itu/Tech_Mada/system/Database/BaseConnection.php(795): CodeIgniter\Database\SQLite3\Connection->initialize()
+#4 /home/itu/Tech_Mada/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+#5 /home/itu/Tech_Mada/app/Controllers/AuthController.php(30): CodeIgniter\Database\BaseBuilder->get()
+#6 /home/itu/Tech_Mada/system/CodeIgniter.php(951): App\Controllers\AuthController->login()
+#7 /home/itu/Tech_Mada/system/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+#8 /home/itu/Tech_Mada/system/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+#9 /home/itu/Tech_Mada/system/Boot.php(417): CodeIgniter\CodeIgniter->run()
+#10 /home/itu/Tech_Mada/system/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+#11 /home/itu/Tech_Mada/public/index.php(59): CodeIgniter\Boot::bootWeb()
+#12 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: SQLite3 error: Unable to open database: unable to open database file in /home/itu/Tech_Mada/system/Database/SQLite3/Connection.php:118
+Stack trace:
+#0 /home/itu/Tech_Mada/system/Database/BaseConnection.php(555): CodeIgniter\Database\SQLite3\Connection->connect()
+#1 /home/itu/Tech_Mada/system/Database/SQLite3/Connection.php(74): CodeIgniter\Database\BaseConnection->initialize()
+#2 /home/itu/Tech_Mada/system/Database/BaseConnection.php(795): CodeIgniter\Database\SQLite3\Connection->initialize()
+#3 /home/itu/Tech_Mada/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+#4 /home/itu/Tech_Mada/app/Controllers/AuthController.php(30): CodeIgniter\Database\BaseBuilder->get()
+#5 /home/itu/Tech_Mada/system/CodeIgniter.php(951): App\Controllers\AuthController->login()
+#6 /home/itu/Tech_Mada/system/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+#7 /home/itu/Tech_Mada/system/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+#8 /home/itu/Tech_Mada/system/Boot.php(417): CodeIgniter\CodeIgniter->run()
+#9 /home/itu/Tech_Mada/system/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+#10 /home/itu/Tech_Mada/public/index.php(59): CodeIgniter\Boot::bootWeb()
+#11 {main}
+CRITICAL - 2026-05-13 10:51:39 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [SQLite3]: SQLite3 error: Unable to open database: unable to open database file
+[Method: POST, Route: login]
+in SYSTEMPATH/Database/BaseConnection.php on line 606.
+ 1 SYSTEMPATH/Database/SQLite3/Connection.php(74): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH/Database/BaseConnection.php(795): CodeIgniter\Database\SQLite3\Connection->initialize()
+ 3 SYSTEMPATH/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+ 4 APPPATH/Controllers/AuthController.php(30): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\AuthController->login()
+ 6 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 7 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 8 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+10 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+ERROR - 2026-05-13 10:51:45 --> Error connecting to the database: Exception: Unable to open database: unable to open database file in /home/itu/Tech_Mada/system/Database/SQLite3/Connection.php:111
+Stack trace:
+#0 /home/itu/Tech_Mada/system/Database/SQLite3/Connection.php(111): SQLite3->__construct()
+#1 /home/itu/Tech_Mada/system/Database/BaseConnection.php(555): CodeIgniter\Database\SQLite3\Connection->connect()
+#2 /home/itu/Tech_Mada/system/Database/SQLite3/Connection.php(74): CodeIgniter\Database\BaseConnection->initialize()
+#3 /home/itu/Tech_Mada/system/Database/BaseConnection.php(795): CodeIgniter\Database\SQLite3\Connection->initialize()
+#4 /home/itu/Tech_Mada/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+#5 /home/itu/Tech_Mada/app/Controllers/AuthController.php(30): CodeIgniter\Database\BaseBuilder->get()
+#6 /home/itu/Tech_Mada/system/CodeIgniter.php(951): App\Controllers\AuthController->login()
+#7 /home/itu/Tech_Mada/system/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+#8 /home/itu/Tech_Mada/system/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+#9 /home/itu/Tech_Mada/system/Boot.php(417): CodeIgniter\CodeIgniter->run()
+#10 /home/itu/Tech_Mada/system/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+#11 /home/itu/Tech_Mada/public/index.php(59): CodeIgniter\Boot::bootWeb()
+#12 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: SQLite3 error: Unable to open database: unable to open database file in /home/itu/Tech_Mada/system/Database/SQLite3/Connection.php:118
+Stack trace:
+#0 /home/itu/Tech_Mada/system/Database/BaseConnection.php(555): CodeIgniter\Database\SQLite3\Connection->connect()
+#1 /home/itu/Tech_Mada/system/Database/SQLite3/Connection.php(74): CodeIgniter\Database\BaseConnection->initialize()
+#2 /home/itu/Tech_Mada/system/Database/BaseConnection.php(795): CodeIgniter\Database\SQLite3\Connection->initialize()
+#3 /home/itu/Tech_Mada/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+#4 /home/itu/Tech_Mada/app/Controllers/AuthController.php(30): CodeIgniter\Database\BaseBuilder->get()
+#5 /home/itu/Tech_Mada/system/CodeIgniter.php(951): App\Controllers\AuthController->login()
+#6 /home/itu/Tech_Mada/system/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+#7 /home/itu/Tech_Mada/system/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+#8 /home/itu/Tech_Mada/system/Boot.php(417): CodeIgniter\CodeIgniter->run()
+#9 /home/itu/Tech_Mada/system/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+#10 /home/itu/Tech_Mada/public/index.php(59): CodeIgniter\Boot::bootWeb()
+#11 {main}
+CRITICAL - 2026-05-13 10:51:45 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [SQLite3]: SQLite3 error: Unable to open database: unable to open database file
+[Method: POST, Route: login]
+in SYSTEMPATH/Database/BaseConnection.php on line 606.
+ 1 SYSTEMPATH/Database/SQLite3/Connection.php(74): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH/Database/BaseConnection.php(795): CodeIgniter\Database\SQLite3\Connection->initialize()
+ 3 SYSTEMPATH/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+ 4 APPPATH/Controllers/AuthController.php(30): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\AuthController->login()
+ 6 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 7 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 8 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+10 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+CRITICAL - 2026-05-13 10:55:12 --> ErrorException: Undefined variable $stats
+[Method: GET, Route: rh/dashboard]
+in APPPATH/Views/rh/dashboard.php on line 23.
+ 1 APPPATH/Views/rh/dashboard.php(23): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(240): include('/home/itu/Tech_Mada/app/Views/rh/dashboard.php')
+ 3 SYSTEMPATH/View/View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1250): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Home.php(27): view()
+ 6 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\Home->rh()
+ 7 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 9 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+11 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
