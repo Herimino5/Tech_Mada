@@ -16,12 +16,12 @@ $demandes = is_array($viewData['demandes'] ?? null) ? $viewData['demandes'] : []
   </div>
   <table class="tbl">
     <thead>
-      <tr><th>Type</th><th>Début</th><th>Fin</th><th>Durée</th><th>Statut</th><th>Commentaire RH</th><th>Motif</th></tr>
+      <tr><th>Type</th><th>Début</th><th>Fin</th><th>Durée</th><th>Statut</th><th>Commentaire RH</th><th>Motif</th><th>Actions</th></tr>
     </thead>
     <tbody>
       <?php if ($demandes === []): ?>
         <tr>
-          <td colspan="7">
+          <td colspan="8">
             <div class="empty"><i class="bi bi-calendar3"></i><p>Aucune demande enregistrée.</p></div>
           </td>
         </tr>
@@ -46,6 +46,16 @@ $demandes = is_array($viewData['demandes'] ?? null) ? $viewData['demandes'] : []
             <td><span class="statut <?= esc($statusClass) ?>"><?= esc($status) ?></span></td>
             <td class="td-muted"><?= esc((string) ($demande['commentaire_rh'] ?? '-')) ?></td>
             <td class="td-muted"><?= esc((string) ($demande['motif'] ?? '-')) ?></td>
+            <td>
+              <?php if ($status === 'en_attente'): ?>
+                <form method="post" action="<?= site_url('/employe/demandes/' . (int) ($demande['id'] ?? 0) . '/annuler') ?>" onsubmit="return confirm('Annuler cette demande en attente ?');">
+                  <?= csrf_field() ?>
+                  <button type="submit" class="btn-ghost" style="padding:.5rem .8rem"><i class="bi bi-x-circle"></i> Annuler</button>
+                </form>
+              <?php else: ?>
+                <span class="td-muted">-</span>
+              <?php endif; ?>
+            </td>
           </tr>
         <?php endforeach; ?>
       <?php endif; ?>

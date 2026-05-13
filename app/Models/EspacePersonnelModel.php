@@ -133,4 +133,48 @@ class EspacePersonnelModel extends Model
 
         return $row ?: null;
     }
+
+    public function getProfile(int $employeId): ?array
+    {
+        $row = $this->db->table('employes e')
+            ->select('e.id, e.nom, e.prenom, e.email, e.date_embauche, e.departement_id, e.actif, d.nom AS departement_nom')
+            ->join('departments d', 'd.id = e.departement_id', 'left')
+            ->where('e.id', $employeId)
+            ->get()
+            ->getRowArray();
+
+        return $row ?: null;
+    }
+
+    public function updateProfile(int $employeId, array $data): bool
+    {
+        return (bool) $this->db->table('employes')
+            ->where('id', $employeId)
+            ->update($data);
+    }
+
+    public function getDemandeByIdForEmployee(int $demandeId, int $employeId): ?array
+    {
+        $row = $this->db->table('conges c')
+            ->select('c.id, c.statut, c.date_debut, c.date_fin, c.type_conge_id, t.libelle AS type_libelle')
+            ->join('types_conge t', 't.id = c.type_conge_id')
+            ->where('c.id', $demandeId)
+            ->where('c.employe_id', $employeId)
+            ->get()
+            ->getRowArray();
+
+        return $row ?: null;
+    }
+
+    public function cancelPendingDemande(int $demandeId, int $employeId): bool
+    {
+        $demande = $this->getDemandeByIdForEmployee($demandeId, $employeId);
+        if ($demande === null || (string) ($demande['statut'] ?? '') !== 'en_attente') {
+            return false;
+        }
+
+        return (bool) $this->update($demandeId, [
+            'statut' => 'annulee',
+        ]);
+    }
 }

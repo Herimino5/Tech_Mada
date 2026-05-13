@@ -63,6 +63,77 @@ class EmployeController extends BaseController
         ]);
     }
 
+    public function profile()
+    {
+        if ((string) session()->get('role') !== 'employe') {
+            return redirect()->to('/login')->with('error', 'Acces refuse.');
+        }
+
+        $employeId = (int) session()->get('id');
+
+        return view('employe/profil', [
+            'profile' => $this->espaceModel->getProfile($employeId),
+            'fullName' => trim((string) session()->get('prenom') . ' ' . (string) session()->get('nom')),
+        ]);
+    }
+
+    public function updateProfile()
+    {
+        if ((string) session()->get('role') !== 'employe') {
+            return redirect()->to('/login')->with('error', 'Acces refuse.');
+        }
+
+        $employeId = (int) session()->get('id');
+        $currentEmail = (string) session()->get('email');
+
+        $rules = [
+            'nom' => 'required|min_length[2]|max_length[100]',
+            'prenom' => 'required|min_length[2]|max_length[100]',
+            'email' => 'required|valid_email|max_length[150]|is_unique[employes.email,id,' . $employeId . ']',
+        ];
+
+        if (! $this->validate($rules)) {
+            return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+        }
+
+        $nom = trim((string) $this->request->getPost('nom'));
+        $prenom = trim((string) $this->request->getPost('prenom'));
+        $email = trim((string) $this->request->getPost('email'));
+
+        $updated = $this->espaceModel->updateProfile($employeId, [
+            'nom' => $nom,
+            'prenom' => $prenom,
+            'email' => $email,
+        ]);
+
+        if (! $updated) {
+            return redirect()->back()->withInput()->with('error', 'La mise a jour du profil a echoue.');
+        }
+
+        session()->set([
+            'nom' => $nom,
+            'prenom' => $prenom,
+            'email' => $email,
+        ]);
+
+        return redirect()->to('/employe/profil')->with('success', 'Votre profil a ete mis a jour avec succes.');
+    }
+
+    public function cancelDemande(int $id)
+    {
+        if ((string) session()->get('role') !== 'employe') {
+            return redirect()->to('/login')->with('error', 'Acces refuse.');
+        }
+
+        $employeId = (int) session()->get('id');
+
+        if (! $this->espaceModel->cancelPendingDemande($id, $employeId)) {
+            return redirect()->to('/employe/demandes')->with('error', 'Seule une demande en attente peut etre annulee.');
+        }
+
+        return redirect()->to('/employe/demandes')->with('success', 'La demande a ete annulee.');
+    }
+
     public function storeDemande()
     {
         if ((string) session()->get('role') !== 'employe') {
